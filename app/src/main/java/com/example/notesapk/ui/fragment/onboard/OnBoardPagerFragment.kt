@@ -28,14 +28,17 @@ class OnBoardPagerFragment : Fragment() {
     private fun initialze() = with(binding!!) {
         when(requireArguments().getInt(ARG_POSITION)){
             0 -> {
+                lottieAnimation.setAnimation(R.raw.animation)
                 txtOnBoardTitle.text = "Удобство"
                 txtOnBoardDescription.text = "Создавайте заметки в два клика! Записывайте мысли, идеи и важные задачи мгновенно."
             }
             1 -> {
+                lottieAnimation.setAnimation(R.raw.animayion_2)
                 txtOnBoardTitle.text = "Организация"
                 txtOnBoardDescription.text = "Организуйте заметки по папкам и тегам. Легко находите нужную информацию в любое время."
             }
             2 -> {
+                lottieAnimation.setAnimation(R.raw.animation_3)
                 txtOnBoardTitle.text = "Синхронизация"
                 txtOnBoardDescription.text = "Синхронизация на всех устройствах. Доступ к записям в любое время и в любом месте."
             }
