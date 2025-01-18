@@ -1,5 +1,4 @@
 package com.example.notesapk.utils
-
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -13,6 +12,4 @@ class PreferenceHelper {
     var onBoard: Boolean
         get() = sheredPreferences!!.getBoolean("onBoard", false)
         set(value) = sheredPreferences!!.edit().putBoolean("onBoard", value).apply()
-
-
 }
