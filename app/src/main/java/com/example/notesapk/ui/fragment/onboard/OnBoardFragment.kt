@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.notesapk.R
 import com.example.notesapk.databinding.FragmentOnBoardBinding
@@ -15,6 +16,7 @@ import com.example.notesapk.utils.PreferenceHelper
 
 class OnBoardFragment : Fragment() {
     private var binding: FragmentOnBoardBinding? = null
+    private val sharedPreferences = PreferenceHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,13 @@ class OnBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreferences.unit(requireContext())
+
+        if (sharedPreferences.onBoard) {
+            findNavController().navigate(OnBoardFragmentDirections.actionOnBoardFragmentToNoteFragment())
+            return
+        }
+
         initialze()
         setupListeners()
         setupDotsIndicator()
@@ -36,7 +45,7 @@ class OnBoardFragment : Fragment() {
     }
 
     private fun setupListeners() = with(binding?.viewPager){
-        val sheredPreferences = PreferenceHelper()
+
         this?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -44,8 +53,7 @@ class OnBoardFragment : Fragment() {
                     binding?.btnStart?.visibility = View.VISIBLE
                     binding?.txtSkip?.visibility = View.INVISIBLE
                     binding?.btnStart?.setOnClickListener {
-                        sheredPreferences.unit(requireContext())
-                        sheredPreferences.onBoard = true
+                        sharedPreferences.onBoard = true
                         findNavController().navigate(OnBoardFragmentDirections.actionOnBoardFragmentToNoteFragment())
 
                     }
@@ -63,10 +71,5 @@ class OnBoardFragment : Fragment() {
         binding?.viewPager?.let { viewPager ->
                 binding?.dotsIndicator?.setViewPager2(viewPager)
          }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }
