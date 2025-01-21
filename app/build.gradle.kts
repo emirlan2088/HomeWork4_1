@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -55,6 +56,9 @@ dependencies {
     implementation (libs.dotsindicator)
 
     implementation (libs.lottie)
+    
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
 
 }

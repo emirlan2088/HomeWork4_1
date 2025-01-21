@@ -6,4 +6,5 @@
     <color name="onBoard_txt">#D88B02</color>
     <color name="onBoard_background">#252525</color>
     <color name="gray">#808080</color>
+    <color name="ed_search_background">#535353</color>
 </resources>
