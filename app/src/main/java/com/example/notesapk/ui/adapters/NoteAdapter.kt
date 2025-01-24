@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapk.data.models.NoteModel
 import com.example.notesapk.databinding.ItemNoteBinding
+import com.example.notesapk.ui.fragment.note.NoteFragment
 
-class NoteAdapter : ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCalback()) {
+class NoteAdapter(
+    private val onLongClick: NoteFragment
+    ): ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCalback()) {
     class NoteViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NoteModel) {
@@ -26,6 +29,11 @@ class NoteAdapter : ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCalba
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(getItem(position))
+
+        holder.itemView.setOnLongClickListener {
+            onLongClick.onLongClick(getItem(position))
+            true
+        }
     }
     class DiffCalback() : DiffUtil.ItemCallback<NoteModel>(){
         override fun areItemsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
