@@ -12,4 +12,8 @@ class PreferenceHelper {
     var onBoard: Boolean
         get() = sheredPreferences!!.getBoolean("onBoard", false)
         set(value) = sheredPreferences!!.edit().putBoolean("onBoard", value).apply()
+
+    var saveLayoutManager: Boolean
+        get() = sheredPreferences!!.getBoolean("onLinearLayout", true)
+        set(value) = sheredPreferences!!.edit().putBoolean("onLinearLayout", value).apply()
 }
