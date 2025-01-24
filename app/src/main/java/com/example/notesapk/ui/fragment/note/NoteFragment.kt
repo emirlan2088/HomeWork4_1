@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.Lottie.initialize
 import com.example.notesapk.App
 import com.example.notesapk.R
+import com.example.notesapk.data.models.NoteModel
 import com.example.notesapk.databinding.FragmentNoteBinding
 import com.example.notesapk.ui.adapters.NoteAdapter
+import com.example.notesapk.ui.interfaces.onClickItem
 import com.example.notesapk.utils.PreferenceHelper
 
-class NoteFragment : Fragment() {
+class NoteFragment : Fragment(), onClickItem {
     var binding: FragmentNoteBinding? = null
-    private val noteAdapter = NoteAdapter()
+    private val noteAdapter = NoteAdapter(this)
     private val sharedPreferences = PreferenceHelper()
 
     private var isGridLayout = false // Переменная для отслеживания текущего макета
@@ -95,6 +96,13 @@ class NoteFragment : Fragment() {
     private fun getData() {
         App.appDataBase?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { listModel ->
             noteAdapter.submitList(listModel)
+        }
+    }
+
+    override fun onLongClick(noteModel: NoteModel) {
+        val builder = android.app.AlertDialog.Builder(requireContext())
+        with(builder){
+
         }
     }
 }

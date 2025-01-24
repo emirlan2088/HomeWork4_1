@@ -7,4 +7,11 @@
     <color name="onBoard_background">#252525</color>
     <color name="gray">#808080</color>
     <color name="ed_search_background">#535353</color>
+    <color name="alert_background">#5B5B5B</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="purple">#8b00ff</color>
+    <color name="pink">#FD99FF</color>
+    <color name="red">#FF9E9E</color>
+    <color name="green">#91F48F</color>
+    <color name="blue">#9EFFFF</color>
 </resources>
