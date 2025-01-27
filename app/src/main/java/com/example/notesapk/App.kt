@@ -1,7 +1,10 @@
 package com.example.notesapk
 
 import android.app.Application
+import android.graphics.Color
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.notesapk.data.db.AppDataBase
 import com.example.notesapk.utils.PreferenceHelper
 
@@ -27,7 +30,9 @@ class App: Application() {
                     context,
                     AppDataBase::class.java,
                     "note.database"
-                ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
+                ).fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
+                    .build()
 
             }
         }

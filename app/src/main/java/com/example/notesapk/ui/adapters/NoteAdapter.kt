@@ -10,13 +10,15 @@ import com.example.notesapk.databinding.ItemNoteBinding
 import com.example.notesapk.ui.fragment.note.NoteFragment
 
 class NoteAdapter(
-    private val onLongClick: NoteFragment
+    private val onLongClick: NoteFragment,
+    private val onClick: NoteFragment
     ): ListAdapter<NoteModel, NoteAdapter.NoteViewHolder>(DiffCalback()) {
     class NoteViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NoteModel) {
             binding.txtTitle.text = item.title
             binding.txtText.text = item.description
+            binding.root.setBackgroundColor(item.color)
         }
     }
 
@@ -28,11 +30,15 @@ class NoteAdapter(
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val note = getItem(position)
+        holder.bind(note)
 
         holder.itemView.setOnLongClickListener {
-            onLongClick.onLongClick(getItem(position))
+            onLongClick.onLongClick(note)
             true
+        }
+        holder.itemView.setOnClickListener{
+            onClick.onClick(note)
         }
     }
     class DiffCalback() : DiffUtil.ItemCallback<NoteModel>(){
