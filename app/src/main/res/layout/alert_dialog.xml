@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="170dp"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="170dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     android:background="@drawable/kastom_alert_dialog"
     android:layout_height="150dp">
 
@@ -16,8 +23,8 @@
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <View
 
+    <View
         android:id="@+id/color_yellow"
         android:layout_width="44dp"
         android:layout_height="36dp"
@@ -74,6 +81,6 @@
         app:layout_constraintStart_toStartOf="@id/color_pink"
         app:layout_constraintTop_toBottomOf="@id/color_yellow"
         android:background="@color/blue"/>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
