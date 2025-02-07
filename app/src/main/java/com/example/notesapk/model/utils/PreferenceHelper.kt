@@ -1,4 +1,4 @@
-package com.example.notesapk.utils
+package com.example.notesapk.model.utils
 import android.content.Context
 import android.content.SharedPreferences
 

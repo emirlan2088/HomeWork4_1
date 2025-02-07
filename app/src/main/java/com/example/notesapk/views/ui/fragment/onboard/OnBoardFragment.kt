@@ -1,4 +1,4 @@
-package com.example.notesapk.ui.fragment.onboard
+package com.example.notesapk.views.ui.fragment.onboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.example.notesapk.R
 import com.example.notesapk.databinding.FragmentOnBoardBinding
-import com.example.notesapk.ui.adapters.OnBoardAdapter
-import com.example.notesapk.utils.PreferenceHelper
+import com.example.notesapk.views.ui.adapters.OnBoardAdapter
+import com.example.notesapk.model.utils.PreferenceHelper
 
 
 class OnBoardFragment : Fragment() {

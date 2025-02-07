@@ -1,10 +1,10 @@
-package com.example.notesapk.data.db
+package com.example.notesapk.model.data.db
 
 import android.graphics.Color
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.notesapk.data.db.daos.NoteDao
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.db.daos.NoteDao
+import com.example.notesapk.model.data.models.NoteModel
 
 @Database(entities = [NoteModel::class], version = 2, exportSchema = false)
 abstract class AppDataBase: RoomDatabase()  {

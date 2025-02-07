@@ -1,4 +1,4 @@
-package com.example.notesapk.ui.fragment.note
+package com.example.notesapk.views.ui.fragment.note
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -15,16 +15,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapk.App
 import com.example.notesapk.R
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.models.NoteModel
 import com.example.notesapk.databinding.FragmentNoteBinding
-import com.example.notesapk.ui.adapters.NoteAdapter
-import com.example.notesapk.ui.interfaces.onClickItem
-import com.example.notesapk.utils.PreferenceHelper
+import com.example.notesapk.views.ui.adapters.NoteAdapter
+import com.example.notesapk.views.ui.interfaces.onClickItem
+import com.example.notesapk.model.utils.PreferenceHelper
+import com.example.notesapk.presenter.note.NoteContract
+import com.example.notesapk.presenter.note.NotePresenter
 
-class NoteFragment : Fragment(), onClickItem {
+class NoteFragment : Fragment(), onClickItem, NoteContract.View {
     var binding: FragmentNoteBinding? = null
     private val noteAdapter = NoteAdapter(onLongClick = this, onClick = this)
     private val sharedPreferences = PreferenceHelper()
+    private val presenter by lazy { NotePresenter(this) }
 
     private var isGridLayout = false // Переменная для отслеживания текущего макета
 
@@ -42,7 +45,7 @@ class NoteFragment : Fragment(), onClickItem {
         loadLayoutManagerState()
         initialize()
         setupListener()
-        getData()
+        presenter.loadNotes()
     }
 
     private fun loadLayoutManagerState() {
@@ -98,11 +101,6 @@ class NoteFragment : Fragment(), onClickItem {
         sharedPreferences.saveLayoutManager = !isGridLayout
     }
 
-    private fun getData() {
-        App.appDataBase?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { listModel ->
-            noteAdapter.submitList(listModel)
-        }
-    }
 
     override fun onLongClick(noteModel: NoteModel) {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog2, null)
@@ -120,7 +118,7 @@ class NoteFragment : Fragment(), onClickItem {
         }
         dialogPositive?.setOnClickListener {
             Toast.makeText(requireContext(), "Заметка удалена", Toast.LENGTH_SHORT).show()
-            App.appDataBase?.noteDao()?.delete(noteModel)
+            presenter.deleteNote(noteModel)
             dialog.dismiss()
         }
         dialog.show()
@@ -129,5 +127,10 @@ class NoteFragment : Fragment(), onClickItem {
     override fun onClick(noteModel: NoteModel) {
         val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(noteModel.id)
         findNavController().navigate(action)
+    }
+
+    override fun showNote(note: List<NoteModel>) {
+        noteAdapter.submitList(note)
+        noteAdapter.notifyDataSetChanged()
     }
 }

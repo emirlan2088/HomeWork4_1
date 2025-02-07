@@ -1,4 +1,4 @@
-package com.example.notesapk.data.models
+package com.example.notesapk.model.data.models
 
 import android.graphics.Color
 import androidx.room.Entity

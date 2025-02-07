@@ -1,4 +1,4 @@
-package com.example.notesapk.ui.fragment.note
+package com.example.notesapk.views.ui.fragment.note
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -17,21 +17,25 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.notesapk.App
 import com.example.notesapk.R
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.models.NoteModel
 import com.example.notesapk.databinding.FragmentNoteDetailBinding
+import com.example.notesapk.presenter.notedetail.DetailPresenter
+import com.example.notesapk.presenter.notedetail.NoteDetailContract
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
+import kotlin.Lazy as Lazy1
 
-class NoteDetailFragment : Fragment() {
+class NoteDetailFragment : Fragment(),NoteDetailContract.View {
 
     private var _binding: FragmentNoteDetailBinding? = null
     private val binding get() = _binding!!
     private var noteId: Int = -1
     private var selectedColor: Int = Color.BLACK
     private var date: String? = null
+    private  val presenter by lazy {DetailPresenter(this)}
 
 
     override fun onCreateView(
@@ -92,16 +96,17 @@ class NoteDetailFragment : Fragment() {
             if (noteId != -1) {
                 val upDateNote = NoteModel(etTitle, etText, color = selectedColor, date = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date()))
                 upDateNote.id = noteId
+                presenter.updateNote(upDateNote)
                 App.appDataBase?.noteDao()?.update(upDateNote)
             } else {
-                App.appDataBase?.noteDao()?.insert(NoteModel(title = etTitle, description = etText, color = selectedColor, date = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())))
+                presenter.saveNote(NoteModel(title = etTitle, description = etText, color = selectedColor, date = date.toString()))
             }
             findNavController().navigateUp()
         }
         btnBack.setOnClickListener {
             val etTitle = title.text.toString()
             val etText = text.text.toString()
-            App.appDataBase?.noteDao()?.insert(NoteModel(title = etTitle, description = etText, color = selectedColor, date = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())))
+            presenter.saveNote(NoteModel(title = etTitle, description = etText, color = selectedColor, date = date.toString()))
             findNavController().navigateUp()
         }
         menuColor.setOnClickListener {
@@ -179,6 +184,15 @@ class NoteDetailFragment : Fragment() {
         })
 
         checkInputs()
+    }
+
+
+    override fun swowNote(note: NoteModel) {
+
+    }
+
+    override fun showError(message: String) {
+        TODO("Not yet implemented")
     }
 
     override fun onDestroyView() {

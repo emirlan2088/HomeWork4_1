@@ -1,6 +1,6 @@
-package com.example.notesapk.ui.interfaces
+package com.example.notesapk.views.ui.interfaces
 
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.models.NoteModel
 
 interface onClickItem {
 

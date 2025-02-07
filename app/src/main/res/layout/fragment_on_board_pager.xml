@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
-    tools:context=".ui.fragment.onboard.OnBoardPagerFragment">
+    tools:context=".views.ui.fragment.onboard.OnBoardPagerFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_animation"

@@ -1,4 +1,4 @@
-package com.example.notesapk.data.db.daos
+package com.example.notesapk.model.data.db.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.models.NoteModel
 
 @Dao
 interface NoteDao {

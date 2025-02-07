@@ -1,13 +1,13 @@
-package com.example.notesapk.ui.adapters
+package com.example.notesapk.views.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notesapk.data.models.NoteModel
+import com.example.notesapk.model.data.models.NoteModel
 import com.example.notesapk.databinding.ItemNoteBinding
-import com.example.notesapk.ui.fragment.note.NoteFragment
+import com.example.notesapk.views.ui.fragment.note.NoteFragment
 
 class NoteAdapter(
     private val onLongClick: NoteFragment,

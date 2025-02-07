@@ -1,4 +1,4 @@
-package com.example.notesapk.ui.fragment.onboard
+package com.example.notesapk.views.ui.fragment.onboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
